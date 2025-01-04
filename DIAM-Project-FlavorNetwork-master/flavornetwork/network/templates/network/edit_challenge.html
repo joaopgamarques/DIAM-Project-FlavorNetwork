@@ -1,0 +1,52 @@
+{% extends "network/base.html" %}
+
+{% block title %}Edit Challenge{% endblock %}
+
+{% block feed %}
+<div class="home-div">
+    <h2>Edit Challenge</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.title.errors }}
+                <div class="form-group">
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                {{ form.description.errors }}
+                <div class="form-group">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+                {{ form.start_date.errors }}
+                <div class="form-group">
+                    {{ form.start_date.label_tag }}
+                    {{ form.start_date }}
+                </div>
+                {{ form.end_date.errors }}
+                <div class="form-group">
+                    {{ form.end_date.label_tag }}
+                    {{ form.end_date }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                {{ form.image.errors }}
+                <div class="form-group">
+                    {{ form.image.label_tag }}
+                    {{ form.image }}
+                    <br>
+                </div>
+                {% if form.image.value %}
+                <div class="mb-3 recipe-image">
+                    <img src="{{ form.image.value.url }}" alt="Current Image" class="recipe-image">
+                </div>
+                {% endif %}
+            <br>
+            </div>
+        </div><br>
+        <button type="submit" class="custom-btn-style">Update Challenge</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "network/base.html" %}
+
+{% load static %}
+
+{% block title %}Register{% endblock %}
+
+{% block feed %}
+
+<div class="home-div" style="width: 30%">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-default custom-btn-style ">Register</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "network/base.html" %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+
+{% block feed %}
+
+<div class="profile-container">
+    <div>
+        {% if profile.image %}
+            <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}'s profile image" class="profile-image">
+            <h3 class="profile-name">{{ profile.user.get_full_name }}</h3>
+        {% else %}
+            <img src="{% static 'network/images/default_profile.png' %}" alt="Default profile image" class="profile-image">
+            <h3 class="profile-name">{{ profile.user.get_full_name }}</h3>
+        {% endif %}
+    </div>
+    <div class="profile-info">
+        <h2>Profile information</h2>
+        <p><strong>Email:</strong> {{ profile.user.email }}</p>
+        <p><strong>Culinary Preferences:</strong>  {{ profile.culinary_preferences }}</p>
+        <p><strong>Dietary Restrictions:</strong>  {{ profile.dietary_restrictions }}</p>
+        <a href="{% url 'network:edit-profile' %}" class="custom-btn-style">Edit Profile</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "network/base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block main-container-div %}main-container-login{% endblock %}
+{% block feed-div %}{% endblock %}
+
+{% block feed %}
+    <div class="login-container">
+        <div class="login-logo">
+            <img alt="Flavor Netowrk Logo" src="{% static 'network/images/logo-2.png' %}" class="my-logo">
+        </div>
+        <div class="login-container-form">
+            <form method="post" class="login-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+                <a href="{% url 'network:register' %}" class="btn btn-primary">Register</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

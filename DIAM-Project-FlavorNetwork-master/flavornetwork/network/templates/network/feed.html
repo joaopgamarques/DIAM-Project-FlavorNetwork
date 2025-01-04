@@ -1,0 +1,114 @@
+{% extends "network/base.html" %}
+{% load static %}
+
+{% block title %}Feed{% endblock %}
+
+{% block feed %}
+<div class="home-div" style="position: relative;">
+    <div id="feed-content" class="container mt-4" style="margin-right: 0; margin-left: 0; width: 100%;">
+        {% for recipe in page_obj %}
+        <div class="row mb-4 h-100">
+            <!-- Recipe Image -->
+            <div class="col-7">
+                {% if recipe.images %}
+                <img src="{{ recipe.images.url }}" alt="{{ recipe.title }}" class="recipe-image img-fluid">
+                {% else %}
+                <p class="text-center">Image not available</p>
+                {% endif %}
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="col-1 d-flex flex-column justify-content-center align-items-center p-2"
+                 style="min-width: 5%;">
+                <button class="img-btn btn mb-2" onclick="toggleDisplay('feed-info')">
+                    <img src="{% static 'network/images/info-button.png' %}" alt="info">
+                </button>
+                <button class="img-btn btn mb-2" onclick="toggleDisplay('feed-comments')">
+                    <img src="{% static 'network/images/comment-button.png' %}" alt="Comment"/>
+                </button>
+                <button class="img-btn btn mb-2">
+                    <a href="{% url 'network:view-recipe' recipe.id %}" target="_blank" class="a-view-recipe">
+                        <img src="{% static 'network/images/new-tab.png' %}" alt="New Tab"/>
+                    </a>
+                </button>
+            </div>
+
+            <!-- Recipe Details -->
+            <div id="feed-info" class="col-4 detail-box">
+                <div>
+                    <img src="{{ recipe.user.profile.image.url }}" alt="{{ recipe.user.username }}" width="25"
+                         height="25" class="rounded-circle">
+                    <small>{{ recipe.user.username }}</small><br>
+                    <small>on {{ recipe.publication_date|date:"j F Y" }}</small>
+                </div>
+                <h5 class="mt-0"><strong>{{ recipe.title }}</strong></h5>
+                <div class="recipe-details row">
+                    <div class="col"><strong>Prep:</strong>
+                        <p>{{ recipe.preparation_time }} min</p></div>
+                    <div class="col"><strong>Calories:</strong>
+                        <p>{{ recipe.calories }}</p></div>
+                    <div class="col"><strong>Carbs:</strong>
+                        <p>{{ recipe.carbs }}</p></div>
+                    <div class="col"><strong>Fat:</strong>
+                        <p>{{ recipe.fat }}</p></div>
+                    <div class="col"><strong>Proteins:</strong>
+                        <p>{{ recipe.proteins }}</p></div>
+                </div>
+                <p>{{ recipe.description }}</p>
+                <h5 class="mt-0">Ingredients:</h5>
+                <ul style="text-align: left;">
+                    {% for ingredient in ingredients_list %}
+                    <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Comments Section -->
+            <div id="feed-comments" style="display:none" class="col-4 detail-box">
+                {% if comments %}
+                {% for comment in comments %}
+                <div class="comment">
+                    <strong>{{ comment.user.username }}</strong>
+                    ({{ comment.publication_date|date:"Y-m-d H:i" }}):
+                    <p>{{ comment.text }}</p>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="text-center">
+                    <p>No comments yet. Be the first to comment!</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center">
+            <p>No recipes found. Check back later!</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Navigation buttons -->
+    <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}"
+           class="btn btn-outline-primary circular-btn blink-orange" onclick="handleClick(this)">
+            <img src="{% static 'network/images/left-arrow.png' %}" alt="Previous"/>
+        </a>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}"
+           class="btn btn-outline-primary circular-btn blink-orange" onclick="handleClick(this)">
+            <img src="{% static 'network/images/right-arrow.png' %}" alt="Next"/>
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    document.getElementById('star-btn').addEventListener('click', function () {
+        document.getElementById('star-img').src = "{% static 'network/images/star_selected.png' %}";
+    });
+    toggleDisplay();
+</script>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "network/base.html" %}
+
+{% block feed %}
+<div class="home-div" style="width: 30%">
+    <h1>Manage Users</h1>
+    <div>
+        <form action="{% url 'network:delete-user' %}" method="post" onsubmit="return confirmDeleteUser();" class="form-group">
+            {% csrf_token %}
+            <label for="user_id" class="form-control-label">Select User:</label>
+            <select id="user_id" name="user_id" class="form-control" required>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            </select><br>
+            <button type="submit" class="custom-btn-style">Remove User</button>
+        </form>
+    </div>
+</div>
+<script>
+    function confirmDeleteUser() {
+        const selectElement = document.getElementById('user_id');
+        const selectedUsername = selectElement.options[selectElement.selectedIndex].text;
+        return confirm('Are you sure you want to delete the user "' + selectedUsername + '"?');
+    }
+</script>
+{% endblock %}

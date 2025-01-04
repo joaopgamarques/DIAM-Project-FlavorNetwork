@@ -1,0 +1,65 @@
+{% extends 'network/base.html' %}
+
+{% block title %}Add New Recipe{% endblock %}
+
+{% block feed %}
+
+<div class="home-div">
+    <h2>Add New Recipe</h2>
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+                <div class="form-group">
+                    {{ form.ingredients.label_tag }}
+                    {{ form.ingredients }}
+                </div>
+                <div class="form-group">
+                    {{ form.preparation_time.label_tag }}
+                    {{ form.preparation_time }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.status.label_tag }}
+                    {{ form.status }}
+                </div>
+                <div class="form-group">
+                    {{ form.preparation_steps.label_tag }}
+                    {{ form.preparation_steps }}
+                </div>
+                <div class="form-group">
+                    {{ form.calories.label_tag }}
+                    {{ form.calories }}
+                </div>
+                <div class="form-group">
+                    {{ form.fat.label_tag }}
+                    {{ form.fat }}
+                </div>
+                <div class="form-group">
+                    {{ form.carbs.label_tag }}
+                    {{ form.carbs }}
+                </div>
+                <div class="form-group">
+                    {{ form.proteins.label_tag }}
+                    {{ form.proteins }}
+                </div>
+                <div class="form-group">
+                    {{ form.images.label_tag }}
+                    {{ form.images }}
+                </div>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="custom-btn-style">Save Recipe</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+
+    <script src="{% static 'network/scripts/scripts.js' %}?{% now 'U' %}"></script>
+    <title>{% block title %}Flavor Network{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="{% static 'network/css/styles.css' %}?{% now 'U' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+{% block header %}
+    <header>
+        <div id="{% block top-bar-class %}top-bar{% endblock %}">
+
+            {% block header-menu %}
+                <nav id="nav-bar" class="navbar navbar-expand-lg justify-content-between">
+                    <div class="d-flex">
+                        <img src="{% static 'network/images/logo-2.png' %}" alt="Flavor Network" style="max-height: 50px;">
+                    </div>
+
+                    <div class="d-flex justify-content-center flex-grow-1">
+                        <a href="{% url 'network:index' %}">Home</a>
+                        <a href="{% url 'network:feed' %}">Feed</a>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'network:view-cookbook' user.id %}">Cookbook</a>
+                            <a href="{% url 'network:view-favorites' %}">Favorites</a>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}" width="50" height="50" class="rounded-circle">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="{% url 'network:profile' %}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'network:logout' %}">Logout</a></li>
+                                {% if user.is_superuser %}
+                                    <li><a href="{% url 'network:manage-users' %}">Manage Users</a></li>
+                                    <li><a href="{% url 'network:add-challenge' %}">Add Challenge</a></li>
+                                    <li><a href="{% url 'network:manage-challenges' %}">Manage Challenges</a></li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </nav>
+            {% endblock %}
+
+        </div>
+    </header>
+{% endblock %}
+
+<div id="{% block main-container-div %}main-container{% endblock %}">
+
+    {% block feed %}
+    {% endblock %}
+
+</div>
+
+</body>
+</html>
+
+<script>
+    $( ".dropdown-toggle" ).click(function() {
+        if ( $('#home-div').hasClass('normal') ) {
+            $('#home-div').removeClass('normal').addClass('open');
+        } else {
+            $('#home-div').removeClass('open').addClass('normal');
+        }
+    });
+</script>

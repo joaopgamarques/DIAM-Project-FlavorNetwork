@@ -1,0 +1,32 @@
+{% extends "network/base.html" %}
+
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block feed %}
+    <div class="home-div">
+        <div class="container mt-5">
+            <h2>Your Cookbook</h2>
+            <div class="row">
+                {% for recipe in cookbook.recipes.all %}
+                    <!-- Recipe Card -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card" >
+                            <img src="{{ recipe.images.url }}" alt="{{ recipe.title }}" class="card-img-top" style="height: 400px;">
+                            <div class="card-body custom-box-color" style="background-color: #f9f1e7">
+                                <h5 class="card-title overflow-hidden text-truncate">{{ recipe.title }}</h5>
+                                <div class="card-text overflow-hidden text-truncate" style="max-height: 3em;">
+                                    {{ recipe.description }}
+                                </div>
+                                <br>
+                                <a href="{% url 'network:view-recipe' recipe.id %}" class="custom-btn-style">View Recipe</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'network:add-recipe' %}" class="custom-btn-style mb-3">Add New Recipe</a>
+        </div>
+    </div>
+{% endblock %}

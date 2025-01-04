@@ -1,0 +1,67 @@
+{% extends "network/base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block feed %}
+    <!-- Including Bootstrap CSS and JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <div class="home-div">
+        <!-- Carousel for Challenges -->
+        <div id="challengesCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for challenge in challenges %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}" style="height: 300px;">
+                        {% if challenge.image and challenge.image.url %}
+                            <img class="d-block w-100 h-100" src="{{ challenge.image.url }}" alt="{{ challenge.title }}"
+                                 style="object-fit: cover;">
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#challengesCarousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#challengesCarousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Challenge Details Section -->
+        <div class="container mt-3">
+            {% for challenge in challenges %}
+                <div class="card mb-4 {% if not forloop.first %}d-none{% endif %}"
+                     id="challengeInfo{{ forloop.counter }}">
+                    <div class="card-body" style="background-color: #f9f1e7">
+                        <h5 class="card-title">{{ challenge.title }}</h5>
+                        <p class="card-text">{{ challenge.description }}</p>
+                        <p class="card-text"><small class="text-muted">Starts: {{ challenge.start_date }} -
+                            Ends: {{ challenge.end_date }}</small></p>
+                        <a href="{% url 'network:view-challenge' challenge.id %}" class="custom-btn-style">View
+                            Challenge</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        // Handle carousel slide event to update visible challenge info.
+        var challengeCarousel = document.getElementById('challengesCarousel');
+        challengeCarousel.addEventListener('slide.bs.carousel', function (event) {
+            var activeItemIndex = event.to; // Index of the new active carousel item.
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(card => card.classList.add('d-none')); // Hide all cards.
+            document.querySelector('#challengeInfo' + (activeItemIndex + 1)).classList.remove('d-none'); // Show the correct card.
+        });
+    </script>
+
+{% endblock %}

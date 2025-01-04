@@ -1,0 +1,777 @@
+/* Basic resets and font settings for body and html elements */
+html, body {
+    height: 100%; /* Full height for the page */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    font-family: 'Arial', sans-serif; /* Set default font */
+    background-color: #f9f1e7; /* Light background color for better readability */
+}
+
+/* Styling for the header which remains at the top of the page */
+header {
+    position: fixed; /* Keeps the header at the top during scrolling */
+    top: 0; /* Align top edge at the top of the viewport */
+    height: 60px; /* Fixed height */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensures header stays above other content */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+}
+
+/* Main container for content, providing top padding to avoid overlap with the header */
+#main-container {
+    padding-top: 60px; /* Same height as the header */
+    width: 100%; /* Full width */
+    display: flex; /* Flex container for inner elements */
+    justify-content: center; /* Center content horizontally */
+    z-index: 1; /* Stacking context */
+}
+
+/* Special container for login forms */
+#main-container-login {
+    position: fixed; /* Fixed position to stay in view */
+    top: 120px; /* Positioned below the header */
+    bottom: 120px; /* Margin from the bottom */
+    height: calc(100% - 240px); /* Dynamic height calculation */
+    width: 100%; /* Full width */
+    display: flex; /* Flex container to align child elements */
+    justify-content: space-evenly; /* Evenly space children */
+    align-items: center; /* Vertically center children */
+    align-content: center; /* Center content within the container */
+}
+
+/* General styling for home containers */
+.home-div {
+    width: 80%; /* Standard width */
+    height: 100%; /* Full container height */
+    background: antiquewhite; /* Background color */
+    padding: 20px; /* Padding around content */
+    margin: 1%; /* Margin for spacing */
+    transition: width 1s ease-in-out; /* Smooth transition for width adjustments */
+}
+
+/* Styling states for home div adjustments */
+.home-div.normal {
+    width: calc(100% - 500px); /* Calculate width dynamically */
+}
+
+.home-div.open {
+    width: 80%; /* Reset to standard width when open */
+}
+
+/* Footer styling, fixed at the bottom */
+footer {
+    text-align: center; /* Center text */
+    position: fixed; /* Fix position to bottom */
+    bottom: 0; /* Align to bottom of the viewport */
+    height: 50px; /* Fixed height */
+    width: 100%; /* Full width */
+    background-color: rgba(242, 135, 5, 0.3); /* Semi-transparent orange background */
+    color: #fff; /* White text color */
+}
+
+/* Top bar styles for application branding or navigation */
+#top-bar {
+    height: 60px; /* Match header height */
+    background-color: rgba(242, 135, 5, 0.3); /* Branding color */
+    color: #fff; /* Text color */
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Vertical centering */
+    justify-content: space-evenly; /* Evenly spaced items */
+}
+
+/* Additional top bar styles for different application states or pages */
+#top-bar-login {
+    background-color: rgba(242, 135, 5, 0.3); /* Consistent with top-bar */
+    color: #fff; /* Consistent text color */
+    display: flex; /* Flexbox for layout */
+    align-items: center; /* Vertical alignment */
+    padding: 10px; /* Padding for spacing */
+    justify-content: center; /* Center content */
+}
+
+/* Logo specific styling within the top bar */
+#top-bar-logo {
+    height: 60px; /* Ensure logo height matches the top bar */
+    align-content: center; /* Center content alignment */
+}
+
+/* Navigation bar styles */
+#nav-bar {
+    width: 100%; /* Full width for navigation */
+    background-color: rgba(242, 135, 5, 0); /* Transparent background */
+    color: #fff; /* White text for visibility */
+}
+
+/* Link styles within the navigation bar */
+#nav-bar a {
+    display: inline-block; /* Allow block properties for inline elements */
+    color: #666; /* Dark grey text for readability */
+    text-decoration: none; /* No underline to keep it clean */
+    padding: 10px 20px; /* Padding for clickable area */
+    margin: 2px 10px; /* Margin for spacing between links */
+    border-radius: 20px; /* Rounded corners for aesthetic appeal */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Smooth transitions for interaction */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Hover effects for links to increase user interaction feedback */
+#nav-bar a:hover {
+    background-color: rgba(255, 165, 0, 0.75); /* Darker orange for emphasis */
+    color: #fff; /* White text for contrast */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+}
+
+#nav-bar ul {
+    margin-right: 20px; /* Right margin for spacing */
+}
+
+/* Dropdown specific styles */
+#userDropdown {
+    border: none !important; /* Remove any borders */
+    background: none !important; /* Transparent background */
+    padding: 0 !important; /* No padding to maintain layout consistency */
+    cursor: pointer; /* Pointer cursor for clickable items */
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+    border: none; /* No border for cleaner design */
+    background-color: rgba(0, 0, 0, 0); /* Transparent background */
+}
+
+/* Dropdown menu list item styling */
+.dropdown-menu li {
+    width: 200px; /* Fixed width for consistency */
+}
+
+/* Dropdown menu link styling */
+.dropdown-menu a {
+    width: 200px; /* Match list item width */
+    background-color: rgba(242, 135, 5, 0.2); /* Semi-transparent background for visibility */
+    z-index: 5; /* Ensure dropdown stays on top */
+}
+
+/* Hover and focus states for dropdown to maintain user interaction consistency */
+#userDropdown:hover, #userDropdown:focus {
+    background: none !important; /* Keep background consistent on hover/focus */
+    box-shadow: none !important; /* No shadow for a clean look */
+    border: #ffa500 !important; /* Highlight with a border color if needed */
+}
+
+/* Link enhancements to fit the food theme of the application */
+a:hover {
+    background-color: rgba(242, 183, 5, 0.3); /* Muted gold for subtle hover effects */
+    color: #ffffff; /* White text for contrast */
+}
+
+/* Login form styling for clear user interface */
+.login-form {
+    width: 400px; /* Fixed width for consistency */
+    background-color: #fff; /* White background for clarity */
+    padding: 20px; /* Padding for spacing inside the form */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow for depth */
+    display: grid; /* Grid layout for form elements */
+    grid-gap: 15px; /* Spacing between grid items */
+    z-index: 1; /* Ensure form is above other content */
+}
+
+/* Paragraph styles within the login form for consistency */
+.login-form p {
+    margin: 0; /* Remove default margin */
+}
+
+/* Label styles within the login form for clear identification */
+.login-form label {
+    display: block; /* Block display for full width */
+    margin-bottom: 5px; /* Margin below for spacing */
+    color: #333; /* Dark grey for readability */
+    font-size: 16px; /* Standard font size for clear legibility */
+}
+
+/* Placeholder styles for text and password inputs */
+.login-form input[type="text"]::placeholder,
+.login-form input[type="password"]::placeholder {
+    color: rgba(51, 51, 51, 0.7); /* Grey with transparency for subtle appearance */
+    font-style: italic; /* Italicized text for differentiation */
+}
+
+/* Text and password input styles for the login form */
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    background: rgba(255, 255, 255, 0.5); /* Semi-transparent white for visibility */
+    color: #333; /* Dark grey for readability */
+    width: 100%; /* Full width to fill the form */
+    padding: 10px; /* Padding for comfortable interaction */
+    margin-bottom: 15px; /* Bottom margin for spacing */
+    border: 1px solid #ccc; /* Light grey border for definition */
+    border-radius: 5px; /* Rounded corners for aesthetics */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    transition: border-color 0.3s; /* Smooth transition for border color change */
+}
+
+/* Focus states for text and password inputs to highlight active elements */
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: #f2b705; /* Highlight with a golden color */
+    outline: none; /* Remove default focus outline */
+}
+
+/* Button styles within the login form for actions */
+.login-form button {
+    background-color: #f2b705; /* Golden background for emphasis */
+    color: #fff; /* White text for contrast */
+    padding: 10px 20px; /* Adequate padding for clickable area */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners for a softer look */
+    cursor: pointer; /* Pointer cursor for clickable items */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+/* Hover state for buttons to provide feedback */
+.login-form button:hover {
+    background-color: #e6a400; /* Darker shade of gold for emphasis */
+}
+
+/* Container styles for aligning slider content */
+.container {
+    text-align: center; /* Center text alignment for consistency */
+}
+
+/* Image styles within slider content for visual appeal */
+.slider-content-image {
+    width: 50%; /* Half width for balance */
+    margin-top: 10px; /* Top margin for spacing */
+    text-align: center; /* Center align images for focus */
+    align-content: center; /* Center content alignment */
+}
+
+/* Styles for the slider content area */
+.slider-content {
+    height: 70%; /* Use 70% of the parent container's height */
+    display: flex; /* Flex display for flexible alignment */
+    justify-content: space-between; /* Space out content for a balanced look */
+}
+
+/* Text content within the slider for descriptive or promotional messages */
+.slider-content-text {
+   align-items: flex-start; /* Align items to the start of the container */
+    width: 68%; /* Use 68% width for textual balance */
+    margin-left: 20px; /* Left margin for spacing from adjacent elements */
+    background-color: #f9f1e7; /* Light gray background for thematic consistency */
+    border: 1px solid #e1e1e1; /* Light gray border for subtle separation */
+    padding: 20px; /* Padding for content spacing */
+    border-radius: 5px; /* Rounded corners for a softer appearance */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    text-align: left; /* Left-aligned text for traditional reading flow */
+}
+
+/* Image styles for slides to ensure proper display */
+.slide-image {
+    flex: 0 0 auto; /* Flex basis auto, no growth or shrink */
+    width: 100%; /* Full width to cover the content area */
+    height: 100%; /* Full height to match parent */
+    object-fit: scale-down; /* Scale down to fit without distortion */
+    border-radius: 20px; /* Rounded corners for visual appeal */
+}
+
+/* Indicator section styling for navigation or status display within the slider */
+.indicator-section {
+    margin-top: 0; /* No top margin to stay closely aligned */
+    height: 25%; /* Use 25% of parent height for indicators */
+    display: flex; /* Flex display for flexible alignment */
+    justify-content: center; /* Center align indicators for symmetry */
+}
+
+/* Individual indicator column styling for discrete navigational elements */
+.indicator-column {
+    width: 18%; /* Use 18% of parent width for each indicator */
+    flex: 1; /* Flex grow and shrink equally */
+    align-content: center; /* Center content vertically */
+    margin-right: 2px; /* Right margin for spacing between indicators */
+    margin-left: 2px; /* Left margin for consistent spacing */
+}
+
+/* Thumbnail image styles for preview or decorative purposes */
+.thumbnail {
+    flex: 0 0 auto; /* Flex basis auto, no growth or shrink */
+    width: 100%; /* Full width to fill the container */
+    height: 100%; /* Full height to match the container */
+    object-fit: cover; /* Cover the area without distortion */
+    opacity: 0.6; /* Reduced opacity for less focus */
+    transition: opacity 0.6s ease; /* Smooth transition for opacity change */
+    border-radius: 25px; /* Rounded corners for a soft aesthetic */
+}
+
+/* Hover and active state styles for thumbnails to indicate interaction */
+.thumbnail:hover, .thumbnail.active {
+    opacity: 1; /* Full opacity to highlight active or hovered item */
+}
+
+/* Logo styles within login areas for brand representation */
+.login-logo {
+    margin: 0 auto; /* Center margin for auto alignment */
+    object-fit: scale-down; /* Scale down to fit without distortion */
+}
+
+/* Form container styles within login areas for structured form presentation */
+.login-container-form {
+    z-index: 1; /* Ensure form is above other content for interaction */
+}
+
+/* General container styles for login areas to ensure visibility and accessibility */
+.login-container {
+    position: fixed; /* Fixed position to stay in viewport */
+    display: flex; /* Flex display for flexible alignment */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+/* Styles for the Container of Feed Content */
+#feed-content {
+    width: 100%; /* Ensures it takes full width */
+    margin: 0; /* Remove margins that might cause shifts */
+    display: grid;
+    gap: 10px; /* Adjust gap to ensure it's not too wide */
+}
+
+/* Styles for the main content area of feed pages */
+#feed-container {
+    display: flex; /* Flex display for flexible layout */
+    align-content: space-around; /* Space content evenly around */
+    justify-content: space-between; /* Space content evenly between */
+    width: 100%; /* Full width to cover content area */
+    height: 100%; /* Full height to cover content area */
+}
+
+/* Info container styles within feed areas for displaying detailed content */
+#feed-info-container {
+    margin-top: 50px; /* Top margin for spacing from top elements */
+    margin-left: 10px; /* Left margin for spacing from adjacent content */
+    background-color: #ffa500; /* Orange background for thematic consistency */
+    display: grid; /* Grid display for structured layout */
+    width: 20%; /* Width as a percentage of parent container */
+    height: 20%; /* Height as a percentage of parent container */
+}
+
+/* Photo container styles within feed areas for displaying main images */
+#feed-photo-container {
+    background-color: #555555; /* Dark grey background for contrast */
+    align-self: center; /* Align to the center of the flex container */
+    align-content: center; /* Center content vertically */
+    justify-content: space-around; /* Space content evenly around */
+    width: 60%; /* Width as a percentage of parent container */
+    height: 90%; /* Height as a percentage of parent container */
+}
+
+/* Image styles within feed areas to ensure proper display and sizing */
+.feed-image {
+    flex: 0 0 auto; /* Flex basis auto, no growth or shrink */
+    width: 100%; /* Full width to cover the content area */
+    height: 100%; /* Full height to match parent */
+}
+
+/* Recipe container styles within feed areas for displaying recipe details */
+#feed-recipe-container {
+    align-self: center; /* Align to the center of the flex container */
+    display: grid; /* Grid display for structured layout */
+    height: 70%; /* Height as a percentage of parent container */
+    width: 25%; /* Width as a percentage of parent container */
+    background-color: #ffa500; /* Orange background for thematic consistency */
+    margin: 10px 0 0 10px; /* Margins for spacing from adjacent content */
+    align-content: space-between; /* Space content evenly within */
+    justify-content: center; /* Center content horizontally */
+}
+
+/* Information block within recipe details for organized display */
+#recipe-info {
+    display: block; /* Block display for structured layout */
+    margin: 5px 5px 0px 5px; /* Margins for internal spacing */
+    background-color: #cccccc; /* Grey background for contrast */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+/* Cooking facts section styles for displaying quick info */
+#cooking-facts {
+    background-color: aqua; /* Aqua background for visual interest */
+    display: flex; /* Flex display for flexible alignment */
+    align-self: center; /* Align to the center of the flex container */
+    align-content: center; /* Center content vertically */
+    justify-content: space-around; /* Space content evenly around */
+}
+
+/* Content block styles within cooking facts for structured layout */
+.cf-content {
+    width: 33%; /* Third width for balanced distribution */
+}
+
+/* Value and image presentation styles within cooking facts for clarity */
+.cf-value p, .cf-image p, .nf-value p, .nf-image p {
+    text-align: center; /* Center text for focus */
+    margin-top: 5px; /* Top margin for spacing */
+    margin-bottom: 5px; /* Bottom margin for uniform spacing */
+}
+
+/* Flex container styles for value and image blocks within cooking facts for alignment */
+.cf-value, .cf-image {
+    display: flex; /* Flex display for flexible alignment */
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Center content horizontally */
+}
+
+/* Nutrition facts section styles for displaying dietary information */
+#nutrition-facts {
+    align-self: center; /* Align to the center of the flex container */
+    justify-self: center; /* Center content horizontally within the grid */
+    background-color: aqua; /* Aqua background for thematic consistency */
+    display: flex; /* Flex display for flexible layout */
+    align-content: space-evenly; /* Space content evenly within */
+}
+
+/* Individual content block styles within nutrition facts for structured display */
+.nf-content {
+    width: 25%; /* Quarter width for balanced distribution */
+}
+
+/* Text styles for values within nutrition facts for emphasis */
+.nt-value p {
+    margin-top: 16px; /* Top margin for spacing */
+    margin-bottom: 0; /* No bottom margin for compact appearance */
+}
+
+/* Main recipe content container styles for detailed recipe display */
+#recipe-content {
+    align-self: center; /* Align to the center of the flex container */
+    justify-self: center; /* Center content horizontally within the grid */
+    width: 75%; /* Three quarters width for detailed display */
+    height: 90%; /* Ninety percent height for substantial content display */
+    border-radius: 25px; /* Rounded corners for aesthetic appeal */
+    background: antiquewhite; /* Subtle background color for theme consistency */
+    padding: 20px; /* Padding for internal spacing */
+    margin: 1% 1% 1% 1%; /* Margins for external spacing */
+}
+
+/* Title styles within the recipe content for emphasis */
+.recipe-title {
+    text-align: center; /* Center text for headline emphasis */
+}
+
+/* Main image styles within the recipe content for visual emphasis */
+.recipe-image {
+    width: 100%; /* Full width to cover the content area */
+    height: auto; /* Auto height to maintain aspect ratio */
+    max-width: 600px; /* Maximum width to prevent overly large images */
+    display: block; /* Block display to allow margins */
+    margin: 0 auto 10px; /* Auto horizontal margins for centering, bottom margin for spacing */
+}
+
+/* Description styles within the recipe content for detailed explanation */
+.recipe-description {
+    background-color: #f2b705; /* Golden background for thematic consistency */
+    display: flex; /* Flex display for flexible layout */
+}
+
+/* Interaction button styles within the recipe content for user actions */
+#interaction-buttons {
+    align-self: center; /* Align to the center of the flex container */
+    justify-self: center; /* Center content horizontally within the grid */
+}
+
+/* Profile container styles for user profile display */
+.profile-container {
+    background-color: antiquewhite; /* Background color for theme consistency */
+    width: 30%; /* Thirty percent width for compact profile display */
+    padding: 20px; /* Padding for internal spacing */
+    border-radius: 8px; /* Rounded corners for aesthetic appeal */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex; /* Flex display for flexible layout */
+    align-items: flex-start; /* Align items to the top for vertical consistency */
+    margin-top: 5%; /* Top margin for spacing from top elements */
+    margin-bottom: auto; /* Auto bottom margin for automatic spacing */
+}
+
+/* Profile image container styles to ensure visual consistency */
+.profile-image {
+    width: 200px; /* Fixed width for consistency */
+    height: 200px; /* Fixed height to match width for square appearance */
+    margin-right: 40px; /* Right margin for spacing from adjacent content */
+    overflow: hidden; /* Hide overflow to ensure the image fits within the container */
+    object-fit: fill; /* Ensure the image covers the entire area */
+}
+
+/* Profile information styles for displaying user details */
+.profile-info {
+    flex: 1; /* Take up the remaining space */
+    padding-left: 5%; /* Left padding for spacing from the image */
+}
+
+/* Profile name text styles for emphasis */
+.profile-name {
+    text-align: center; /* Center text for focus */
+}
+
+/* Small field styles within the recipe content for detailed breakdowns */
+.recipe-small-field {
+    display: flex; /* Flex display for flexible alignment */
+    justify-content: space-between; /* Space content evenly between */
+    width: 100%; /* Full width to utilize available space */
+}
+
+/* Individual small field container styles to ensure even distribution */
+.recipe-small-field > div {
+    flex: 1; /* Allow each container to grow equally */
+    margin-right: 10px; /* Right margin for spacing between fields */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+/* Bold styling for strong tags within small fields for emphasis */
+.recipe-small-field strong {
+    font-weight: bold; /* Bold font for emphasis */
+}
+
+/* Custom box styles for additional theming or promotional areas */
+.custom-box-style {
+    width: 80%; /* Width as a percentage of parent container */
+}
+
+/* Custom color styles for boxes for thematic consistency */
+.custom-box-color {
+    background-color: antiquewhite; /* Subtle background color for aesthetic appeal */
+}
+
+/* Custom button styles for thematic button design */
+.custom-btn-style {
+    display: inline-block; /* Inline block for layout control */
+    background-color: #f27f05; /* Orange background for thematic emphasis */
+    color: #fff; /* White text for contrast */
+    text-decoration: none; /* No underline for a cleaner appearance */
+    padding: 10px 20px; /* Padding for clickable area */
+    margin: 0 10px; /* Horizontal margin for spacing */
+    border: none; /* No border for a cleaner look */
+    border-radius: 5px; /* Rounded corners for softness */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions for interaction */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    font-size: 1em; /* Standard font size for readability */
+}
+
+/* Hover state for custom buttons to provide feedback */
+.custom-btn-style:hover {
+    background-color: #ffa500; /* Lighter orange for hover state */
+    transform: translateY(-2px); /* Slight move up for dynamic effect */
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.3); /* Stronger shadow for emphasis */
+}
+
+/* Active state for custom buttons to indicate action */
+.custom-btn-style:active {
+    background-color: #ff5900; /* Darker orange for active state */
+}
+
+/* Styles for checked items or selected states */
+.checked {
+    color: #f2b705; /* Golden color for emphasis */
+}
+
+/* Button styles for star ratings or selectable icons */
+.star-btn {
+    background-color: inherit; /* Inherit background from parent */
+    border: 0 !important; /* No border for a cleaner look */
+}
+
+/* Image button styles for interactive icons */
+.img-btn {
+    width: 50px; /* Fixed width for consistency */
+    height: 50px; /* Fixed height to match width for square appearance */
+    transition: background 5s ease-in-out; /* Long transition for subtle effect */
+}
+
+/* Image styles within image buttons for proper sizing */
+.img-btn img {
+    width: 25px; /* Fixed width for consistency */
+    height: 25px; /* Fixed height to match width for square appearance */
+}
+
+/* Hover state for image buttons to provide visual feedback */
+.img-btn:hover {
+    background: linear-gradient(to bottom right, #ffffff, #f0f0f0); /* Gradient background for subtle effect */
+}
+
+/* Styles for main content containers within feed areas */
+.feed-cont {
+    width: 60%; /* Sixty percent width for balanced layout */
+}
+
+/* Carousel item styles to ensure fixed dimensions */
+#challengesCarousel .carousel-item {
+    height: 300px; /* Fixed height for uniform appearance */
+}
+
+/* Image styles within carousel items to ensure proper fit */
+#challengesCarousel .carousel-item img {
+    width: 100%; /* Full width to cover the content area */
+    height: 100%; /* Full height to match parent */
+    object-fit: cover; /* Cover the area without distortion */
+}
+
+/* Card body styles within challenge areas for structured presentation */
+.card-body {
+    background-color: #fff; /* White background for readability */
+    border-radius: 0.25rem; /* Rounded corners for aesthetic appeal */
+    padding: 20px; /* Padding for internal spacing */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+/* Primary button styles for actions or emphasis */
+.btn-primary {
+    background-color: #f2b705; /* Golden background for thematic consistency */
+    color: #fff; /* White text for contrast */
+    padding: 10px 20px; /* Padding for clickable area */
+    border: none; /* No border for a cleaner look */
+    border-radius: 5px; /* Rounded corners for softness */
+    cursor: pointer; /* Pointer cursor for clickable items */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+/* Hover and focus states for primary buttons to increase interactivity */
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #e6a400; /* Darker gold for emphasis */
+}
+
+/* Styles for average ratings to display user feedback */
+.average-rating {
+    margin-top: 5px; /* Top margin for spacing */
+    padding: 5px; /* Padding for internal spacing */
+    font-size: 16px; /* Standard font size for readability */
+}
+
+/* Strong tag styles within average ratings for emphasis */
+.average-rating strong {
+    color: #333; /* Dark grey for readability */
+}
+
+/* Span tag styles within average ratings for highlight */
+.average-rating span {
+    color: red; /* Red for emphasis */
+    font-weight: bold; /* Bold for focus */
+}
+
+/* Wrapper styles for challenges to provide structured layout */
+.challenge-wrapper {
+    display: flex; /* Flex display for flexible alignment */
+}
+
+/* Image container styles within challenges for visual emphasis */
+.challenge-image-container {
+    flex: 1; /* Take up available space */
+}
+
+/* Content container styles within challenges for detailed presentation */
+.challenge-content-container {
+    flex: 2; /* Twice the size of the image container for balance */
+    padding-left: 20px; /* Left padding for spacing from the image */
+}
+
+/* Image styles within challenges for appropriate display */
+.challenge-image {
+    max-width: 100%; /* Maximum width to prevent overflow */
+    height: auto; /* Auto height to maintain aspect ratio */
+}
+
+/* Form group styles within challenges for structured form inputs */
+.challenge-form-group {
+    margin-bottom: 10px; /* Bottom margin for spacing between form elements */
+}
+
+/* Form control styles within challenges for input emphasis */
+.challenge-form-control {
+    width: 100%; /* Full width to fill the form area */
+}
+
+/* Circular button styles for rounded interface elements */
+.circular-btn {
+    border-radius: 50%; /* Fully rounded for a circular shape */
+    padding: 10px; /* Padding for size */
+    display: inline-block; /* Inline-block for layout control */
+}
+
+/* Button image styles for sizing within buttons */
+.btn img {
+    width: 20px; /* Fixed width for consistency */
+    height: auto; /* Auto height to maintain aspect ratio */
+}
+
+/* Red cross styles for delete or close actions */
+.red-cross {
+    width: 25px; /* Fixed width for consistency */
+    height: 25px; /* Fixed height to match width for square appearance */
+}
+
+/* Hover state for red crosses to indicate interactive elements */
+.red-cross:hover {
+    transform: translateY(-2px); /* Slight upward movement for dynamic effect */
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.3); /* Stronger shadow for emphasis */
+}
+
+/* Active state for red crosses to indicate action */
+.red-cross:active {
+    background-color: rgba(0, 0, 0, 0.3); /* Dark background for emphasis */
+}
+
+/* Link styles within views to maintain appearance consistency */
+.a-view-recipe {
+    color: inherit; /* Inherit text color from parent */
+    text-decoration: none; /* No underline for a cleaner look */
+}
+
+/* Hover and focus states for view links to increase readability */
+.a-view-recipe:hover, .a-view-recipe:focus {
+    background: none; /* No background change */
+    opacity: 1; /* Full opacity for visibility */
+}
+
+/* Image styles within view links for consistent display */
+.a-view-recipe img {
+    opacity: 1; /* Full opacity for clear display */
+}
+
+/* Hover and focus states for images within view links to ensure visibility */
+.a-view-recipe:hover img, .a-view-recipe:focus img {
+    opacity: 1; /* Full opacity for emphasis */
+}
+
+/* Blinking orange styles for interactive or attention-grabbing elements */
+.blink-orange {
+    border: 1px solid orange; /* Orange border for visibility */
+    position: relative; /* Relative positioning for layout control */
+    background-color: transparent; /* Transparent background for blending */
+}
+
+/* Hover state for blinking orange elements to increase interactivity */
+.blink-orange:hover {
+    background-color: orange; /* Orange background for emphasis */
+    box-shadow: 0 0 10px orange; /* Glowing effect for visibility */
+    border: 1px solid orange; /* Solid orange border for consistency */
+}
+
+/* Focus state for blinking orange elements to indicate interaction */
+.blink-orange:focus {
+    outline: none; /* No outline to maintain style */
+    box-shadow: 0 0 8px orange; /* Soft glow for focus indication */
+}
+
+/* Clicked state styles to indicate active or selected elements */
+.clicked {
+    background-color: orange; /* Orange background for clear indication */
+}
+
+/* Detail box styles for emphasized or highlighted content */
+.detail-box {
+    background-color: #f9f1e7; /* Light gray background for thematic consistency */
+    border: 1px solid #e1e1e1; /* Light gray border for subtle separation */
+    padding: 20px; /* Padding for content spacing */
+    border-radius: 5px; /* Rounded corners for a softer appearance */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    width: 33%; /* One third width for balanced layout */
+    text-align: left; /* Left-aligned text for traditional reading flow */
+}
+

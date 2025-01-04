@@ -1,0 +1,48 @@
+{% extends "network/base.html" %}
+
+{% block title %}Add Challenge{% endblock %}
+
+{% block feed %}
+<div class="home-div">
+    <h2>Add New Challenge</h2>
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="">
+                <div class="form-group">
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{ form.start_date.label_tag }}
+                        {{ form.start_date }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.end_date.label_tag }}
+                        {{ form.end_date }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.image.label_tag }}
+                        {{ form.image }}
+                        {% if form.image.help_text %}
+                            <p class="help">{{ form.image.help_text }}</p>
+                        {% endif %}
+                        {% for error in form.image.errors %}
+                            <p class="error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <button type="submit" class="custom-btn-style">Create Challenge</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

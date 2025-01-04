@@ -1,0 +1,28 @@
+{% extends "network/base.html" %}
+
+{% block feed %}
+<div class="home-div" style="width: 30%">
+    <h1>Manage Challenges</h1>
+    <div>
+        <form method="post" action="{% url 'network:manage-challenges' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="challenge_id">Select Challenge:</label>
+                <select name="challenge_id" id="challenge_id" class="form-control">
+                    {% for challenge in challenges %}
+                    <option value="{{ challenge.id }}">{{ challenge.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="action">Action:</label>
+                <select name="action" id="action" class="form-control">
+                    <option value="edit">Edit</option>
+                    <option value="delete">Delete</option>
+                </select>
+            </div><br>
+            <button type="submit" class="custom-btn-style">Perform Action</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

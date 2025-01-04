@@ -1,0 +1,124 @@
+{% extends "network/base.html" %}
+
+{% load static %}
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block feed %}
+    <div class="home-div">
+        <h1 class="recipe-title">{{ recipe.title }}</h1><br><br>
+        <div class="slider-content">
+            <div class="slider-content-image">
+                {% if recipe.images %}
+                    <img src="{{ recipe.images.url }}" alt="{{ recipe.title }}" class="recipe-image">
+                {% endif %}
+
+                <div class="ratings" id=" {{ rating.score }}">
+                    <form class="rate-form" action="" method="POST" id="{{ recipe.id }}">
+                        {% csrf_token %}
+                        <link rel="stylesheet"
+                              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                        <button type="submit" class="fa fa-star star-btn" id="first"></button>
+                        <button type="submit" class="fa fa-star star-btn" id="second"></button>
+                        <button type="submit" class="fa fa-star star-btn" id="third"></button>
+                        <button type="submit" class="fa fa-star star-btn" id="fourth"></button>
+                        <button type="submit" class="fa fa-star star-btn" id="fifth"></button>
+                        <br>
+                    </form>
+                    <div id="confirm-box"></div>
+                </div>
+
+                <div class="average-rating">
+                    <strong>Average Rating:</strong>
+                    <span>{{ average_rating }}</span> / 5
+                </div><br>
+
+                {% if request.user == recipe.user or request.user.is_superuser %}
+                    <a href="{% url 'network:edit-recipe' recipe.id %}" class="custom-btn-style">Edit Recipe</a>
+                    <a href="{% url 'network:delete-recipe' recipe.id %}" class="custom-btn-style"
+                       onclick="return confirm('Are you sure you want to delete this recipe?');">Delete Recipe</a>
+                {% endif %}
+                {% if request.user.is_authenticated and request.user != recipe.user %}
+                    {% if is_favorite %}
+                        <a href="{% url 'network:remove-from-favorites' recipe.id %}" class="custom-btn-style">Remove
+                            from Favorites</a>
+                    {% else %}
+                        <a href="{% url 'network:add-to-favorites' recipe.id %}" class="custom-btn-style">Add to
+                            Favorites</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="slider-content-text">
+                <div>
+                    <strong>Author:</strong>
+                    <p>{{ recipe.user.first_name }} {{ recipe.user.last_name }}</p>
+                </div>
+                <div>
+                    <strong>Published:</strong>
+                    <p>{{ recipe.publication_date|date:"Y-m-d" }}</p>
+                </div>
+                <div class="recipe-small-field">
+                    <div class>
+                        <strong>Prep Time:</strong>
+                        <p>{{ recipe.preparation_time }} minutes</p>
+                    </div>
+                    <div>
+                        <strong>Status:</strong>
+                        <p>{{ recipe.status|capfirst }}</p>
+                    </div>
+                    <div>
+                        <strong>Calories:</strong>
+                        <p>{{ recipe.calories }}</p>
+                    </div>
+                    <div>
+                        <strong>Carbs:</strong>
+                        <p>{{ recipe.carbs }}</p>
+                    </div>
+                    <div>
+                        <strong>Fat:</strong>
+                        <p>{{ recipe.fat }}</p>
+                    </div>
+                    <div>
+                        <strong>Proteins:</strong>
+                        <p>{{ recipe.proteins }}</p>
+                    </div>
+                </div>
+                <div>
+                    <strong>Description:</strong>
+                    <p>{{ recipe.description }}</p>
+                </div>
+                <div>
+                    <strong>Ingredients:</strong>
+                    <p>{{ recipe.ingredients }}</p>
+                </div>
+                <div>
+                    <strong>Preparation Steps:</strong>
+                    <p>{{ recipe.preparation_steps }}</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Comments</h3>
+        {% for comment in comments %}
+            <div class="comment">
+                <strong>{{ comment.user.username }}</strong> ({{ comment.publication_date|date:"Y-m-d H:i" }}):
+                <p>{{ comment.text }}</p>
+            </div>
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %}
+
+        {% if request.user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button type="submit" class="custom-btn-style">Add Comment</button>
+            </form>
+        {% endif %}
+
+    </div>
+    <script>startRating()</script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}

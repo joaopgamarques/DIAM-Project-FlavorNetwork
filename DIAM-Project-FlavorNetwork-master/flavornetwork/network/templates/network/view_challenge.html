@@ -1,0 +1,70 @@
+{% extends "network/base.html" %}
+
+{% load static %}
+{% block title %}{{ challenge.title }}{% endblock %}
+
+{% block feed %}
+    <div class="home-div">
+        <h1 class="challenge-title">{{ challenge.title }}</h1><br><br>
+        <div class="challenge-wrapper">
+            <div class="challenge-image-container">
+                {% if challenge.image %}
+                    <img src="{{ challenge.image.url }}" alt="{{ challenge.title }}" class="challenge-image">
+                {% endif %}
+            </div>
+            <div class="challenge-content-container">
+                <div>
+                    <strong>Description:</strong>
+                    <p>{{ challenge.description }}</p>
+                </div>
+                <div>
+                    <strong>Start Date:</strong>
+                    <p>{{ challenge.start_date|date:"Y-m-d" }}</p>
+                </div>
+                <div>
+                    <strong>End Date:</strong>
+                    <p>{{ challenge.end_date|date:"Y-m-d" }}</p>
+                </div>
+                <div>
+                    <strong>Recipes:</strong>
+                    <ul>
+                        {% for recipe in challenge.recipes.all %}
+                            <li>
+                                <a href="{% url 'network:view-recipe' recipe.id %}">{{ recipe.title }}</a>
+                                <a href="{% url 'network:remove-recipe-from-challenge' challenge_id=challenge.id recipe_id=recipe.id %}"><img src="{% static 'network/images/red-cross.png' %}" alt="Add to Cookbook" class="red-cross"/></a>
+                            </li>
+                        {% empty %}
+                            <li>No recipes submitted for this challenge yet.</li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    <br>
+                </div>
+                {% if request.user.is_authenticated %}
+                    <div>
+                        <h3>Submit Your Recipe</h3>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_challenge">Challenge:</label>
+                                <select id="id_challenge" name="challenge" class="form-control">
+                                    <option value="{{ challenge.id }}" selected>{{ challenge.title }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_recipe">Recipe:</label>
+                                <select id="id_recipe" name="recipe" class="form-control">
+                                    {% for recipe in user_recipes %}
+                                        <option value="{{ recipe.id }}">{{ recipe.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br>
+                            <button type="submit" class="custom-btn-style">Submit Recipe</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
